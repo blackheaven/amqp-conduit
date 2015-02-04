@@ -3,4 +3,4 @@ Conduit bindings for AMQP
 
 Contact Information
 -------------------
-Toru Tomita <toru.tomita <at> gmail.com>
+Toru Tomita <toru.tomita (at) gmail.com>
