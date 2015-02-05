@@ -1,5 +1,5 @@
 name:                amqp-conduit
-version:             0.1.0.0
+version:             0.1.0.1
 synopsis:            Conduit bindings for AMQP (see amqp package)
 description:         Conduit bindings for AMQP (see amqp package)
 Stability:           alpha
@@ -38,7 +38,7 @@ library
                      , lifted-base
                      , exceptions
                      , transformers-base
-                     , mtl >= 2.2
+                     , mtl >= 2.1
                      , monad-control
                      , text
   
