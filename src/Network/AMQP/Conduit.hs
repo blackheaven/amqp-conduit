@@ -93,8 +93,8 @@ module Network.AMQP.Conduit (
     , module Network.AMQP
     ) where
 import           Control.Exception.Lifted    (bracket)
-import           Control.Monad.Except
--- import           Control.Monad.IO.Class      (MonadIO, liftIO)
+import           Control.Monad               (replicateM)
+import           Control.Monad.IO.Class      (MonadIO, liftIO)
 import           Control.Monad.Trans.Control (MonadBaseControl)
 import           Data.Conduit                (Sink, Source, await, yield)
 import           Data.Maybe                  (isJust, isNothing)

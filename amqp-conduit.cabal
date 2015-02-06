@@ -18,6 +18,9 @@ Homepage:            http://github.com/tatac1/amqp-conduit/
 
 cabal-version:       >=1.8
 
+source-repository head
+    type:     git
+    location: https://github.com/tatac1/amqp-conduit
 
 library
   -- Modules exported by the library.
