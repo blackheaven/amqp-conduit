@@ -9,7 +9,7 @@
 --
 -- /Example/:
 --
--- Connect to a server, declare a queue and an exchange and setup a callback for messages coming in on the queue. Then publish a single message to our new exchange
+-- Connect to a server, declare a queue and an exchange and setup a callback for messages coming in the queue, then publish a message to our new exchange
 --
 -- >{-# LANGUAGE OverloadedStrings #-}
 -- >
@@ -334,6 +334,7 @@ send conn key msg = do
         channel
         (exchangeName (amqpExchange (amqpConf conn))) key msg
     where
+        -- | TODO:
         channel = fst $ head $ (amqpChan conn)
 
 numCheck :: Int -> Int
@@ -342,7 +343,7 @@ numCheck int
     | int > 0 = int
     | otherwise = 1
 
--- | this is for consumer, if you usea it with createConsumers, You have to call ackMsg or ackEnv after processing for any message that you get, otherwise it might be delivered again (see "ackMsg" and "ackEnv" in the "Network.AMQP" module)
+-- | this is AMQP consumer, if you use it with createConsumers, You have to call ackMsg or ackEnv after processing for any message that you get, otherwise it might be delivered again (see "ackMsg" and "ackEnv" in the "Network.AMQP" module)
 amqpReceiveSource :: (Monad m, MonadIO m)
         => (Message, Envelope)
         -> Source m (Message, Envelope)
@@ -352,7 +353,7 @@ amqpReceiveSource (msg, env) = loop
             yield (msg, env)
             loop
 
--- | a sink as sending msgs.
+-- | this is AMQP producer.
 amqpSendSink :: (Monad m, MonadIO m)
         => AmqpConn
         -> ExchangeKey
