@@ -1,5 +1,5 @@
 name:                amqp-conduit
-version:             0.1.0.1
+version:             0.2.0.0
 synopsis:            Conduit bindings for AMQP (see amqp package)
 description:         Conduit bindings for AMQP (see amqp package)
 Stability:           alpha
@@ -33,10 +33,10 @@ library
   -- other-extensions:    
   
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.7 && <4.8
+  build-depends:       base >=4.7 && <4.9
                      , conduit >= 1.2
                      , amqp >= 0.10
-                     , resourcet 
+                     , resourcet
                      , transformers
                      , lifted-base
                      , exceptions
@@ -47,7 +47,7 @@ library
   
   -- Directories containing source files.
   hs-source-dirs:      src     
-  ghc-options:         -Wall -fwarn-incomplete-patterns -O2
+  ghc-options:         -Wall -fwarn-incomplete-patterns
 
 
 test-suite test-amqp-conduit
@@ -63,5 +63,5 @@ test-suite test-amqp-conduit
   type: exitcode-stdio-1.0
   main-is: test.hs
   hs-source-dirs: test
-  ghc-options: -Wall
+  ghc-options: -Wall -fwarn-incomplete-patterns
 

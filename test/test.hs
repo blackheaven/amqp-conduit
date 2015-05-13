@@ -13,23 +13,23 @@ main :: IO ()
 main = hspec $ do
     describe "produce and consume test" $ do
         it "send a message and recieve the message" $ do
-            runResourceT $ withAMQPChannel config $ \conn -> do
-                sendMsg str $$ amqpSendSink conn "myKey"
-            amqp <- createAMQPChannels config 1
-            amqp' <- createConsumers amqp $ \(msg,env) -> do
+            runResourceT $ withChannel config $ \conn -> do
+                sendMsg str $$ amqpSendSink conn "myExchange" "myKey"
+            amqp <- createConnectionChannel config
+            amqp' <- createConsumer amqp "myQueue" Ack $ \(msg,env) -> do
                 amqpReceiveSource (msg,env) $$ printMsg
             -- | NOTE: RabbitMQ 1.7 doesn't implement this command.
             -- amqp'' <- pauseConsumers amqp'
             -- amqp''' <- resumeConsumers amqp''
             threadDelay $ 15  * 1000000
-            _ <- deleteConsumers amqp'
+            _ <- deleteConsumer amqp'
             return ()
 
 str :: String
 str = "This is a test message"
 
 config :: AmqpConf
-config = AmqpConf "amqp://guest:guest@localhost:5672/" queue exchange "myKey"
+config = AmqpConf "amqp://guest:guest@192.168.59.103:5672/" queue exchange "myKey"
     where
         exchange = newExchange {exchangeName = "myExchange", exchangeType = "direct"}
         queue = newQueue {queueName = "myQueue"}
