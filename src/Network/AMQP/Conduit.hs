@@ -242,7 +242,7 @@ sendMsg :: AmqpConn
          -> Exchange
          -> ExchangeKey
          -> Message
-         -> IO ()
+         -> IO (Maybe Int)
 sendMsg conn exchange key msg = do
     publishMsg chan exchange key msg
     where
